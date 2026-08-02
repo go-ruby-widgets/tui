@@ -116,7 +116,24 @@ fired = Tui.dispatch(button, {"kind" => "click"})  # => {"fired"=>["ok"], "repai
 ```
 
 The `require "tui"` binding lives in rbgo (a thin `method_missing` shim over
-`Call`); it is pending in that repo.
+`Call`).
+
+## Examples
+
+[`examples/dashboard.rb`](examples/dashboard.rb) is a runnable end-to-end demo:
+a titled header, a scrollable mailbox list and a status-line footer bound to the
+selection, driven by two `Down` key presses and asserted at cell precision.
+
+```sh
+rbgo examples/dashboard.rb
+# => OK selected=2 status=3/5: Sent
+```
+
+Its Go acceptance test — [`dashboard_example_test.go`](dashboard_example_test.go) —
+reproduces the same scenario through `tui.Call` (the entry point the rbgo binding
+drives) so it runs in CI without an interpreter, and also runs `dashboard.rb`
+through the real `rbgo` binary when it is on `PATH`. See
+[`examples/`](examples/) for more.
 
 ## Install (Go)
 
