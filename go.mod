@@ -3,15 +3,21 @@ module github.com/go-ruby-widgets/tui
 go 1.26.4
 
 require (
-	github.com/go-widgets/toolkit v0.65.0
-	github.com/go-widgets/tui v0.55.0
+	github.com/go-widgets/toolkit v0.201.0
+	github.com/go-widgets/tui v0.57.0
 )
 
 require (
-	github.com/go-opentype/bidi v0.2.0 // indirect
-	github.com/go-opentype/opentype v0.3.7 // indirect
-	github.com/go-opentype/shape v0.3.2 // indirect
-	github.com/go-widgets/painter v0.1.3 // indirect
-	golang.org/x/sys v0.46.0 // indirect
+	github.com/go-gfx/gfx v0.6.0 // indirect
+	github.com/go-iconoir/iconoir v0.2.0 // indirect
+	github.com/go-images/images v0.0.0-20260811115337-bc5d586f8e38 // indirect
+	github.com/go-opentype/fonts v0.6.0 // indirect
+	github.com/go-opentype/opentype v0.6.0 // indirect
+	github.com/go-opentype/shape v0.5.0 // indirect
+	github.com/go-typeset/bidi v0.3.0 // indirect
+	github.com/go-widgets/mvvm v0.5.0 // indirect
+	github.com/go-widgets/painter v0.11.0 // indirect
+	golang.org/x/image v0.45.0 // indirect
+	golang.org/x/sys v0.47.0 // indirect
 	golang.org/x/term v0.44.0 // indirect
 )
