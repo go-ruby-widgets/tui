@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/go-ruby-widgets/tui/actions/workflows/ci.yml/badge.svg)](https://github.com/go-ruby-widgets/tui/actions/workflows/ci.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/go-ruby-widgets/tui.svg)](https://pkg.go.dev/github.com/go-ruby-widgets/tui)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-ruby-widgets/tui)](https://goreportcard.com/report/github.com/go-ruby-widgets/tui)
 
 The pure-Go, Ruby-runtime-independent core of the Ruby **`tui`** gem — a
 terminal-cell user-interface toolkit (widgets, layout containers, frame
