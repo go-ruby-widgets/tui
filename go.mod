@@ -4,7 +4,7 @@ go 1.26.4
 
 require (
 	github.com/go-widgets/toolkit v0.248.0
-	github.com/go-widgets/tui v0.57.0
+	github.com/go-widgets/tui v0.61.0
 )
 
 require (
@@ -20,7 +20,7 @@ require (
 	github.com/go-opentype/shape v0.5.0 // indirect
 	github.com/go-richdoc/richdoc v0.2.0 // indirect
 	github.com/go-typeset/bidi v0.3.0 // indirect
-	github.com/go-widgets/mvvm v0.5.0 // indirect
+	github.com/go-widgets/mvvm v0.8.0 // indirect
 	github.com/go-widgets/painter v0.11.0 // indirect
 	golang.org/x/image v0.45.0 // indirect
 	golang.org/x/net v0.49.0 // indirect
