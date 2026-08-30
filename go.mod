@@ -3,7 +3,7 @@ module github.com/go-ruby-widgets/tui
 go 1.26.4
 
 require (
-	github.com/go-widgets/toolkit v0.248.0
+	github.com/go-widgets/toolkit v0.283.0
 	github.com/go-widgets/tui v0.61.0
 )
 
@@ -12,8 +12,9 @@ require (
 	github.com/coder/websocket v1.8.15 // indirect
 	github.com/go-crdt/collab v0.25.0 // indirect
 	github.com/go-crdt/crdt v0.31.0 // indirect
-	github.com/go-gfx/gfx v0.6.0 // indirect
+	github.com/go-gfx/gfx v0.11.0 // indirect
 	github.com/go-iconoir/iconoir v0.2.0 // indirect
+	github.com/go-icons/iconoir v0.2.0 // indirect
 	github.com/go-images/images v0.0.0-20260811115337-bc5d586f8e38 // indirect
 	github.com/go-opentype/fonts v0.6.0 // indirect
 	github.com/go-opentype/opentype v0.6.0 // indirect
