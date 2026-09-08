@@ -3,7 +3,7 @@ module github.com/go-ruby-widgets/tui
 go 1.26.4
 
 require (
-	github.com/go-widgets/toolkit v0.314.0
+	github.com/go-widgets/toolkit v0.316.0
 	github.com/go-widgets/tui v0.61.0
 )
 
