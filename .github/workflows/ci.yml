@@ -33,8 +33,53 @@ jobs:
       - name: gofmt
         run: test -z "$(gofmt -l .)"
 
+      # TestDashboardExampleThroughRbgo runs examples/dashboard.rb through the
+      # real interpreter and checks the rendered cell grid. It has never run:
+      # rbgo was not on PATH, so it skipped, and a skip is green.
+      #
+      # ⛔ `go install .../cmd/rbgo@latest` WOULD NOT HAVE FIXED IT. rbgo's own
+      # go.mod pins github.com/go-ruby-widgets/tui v0.3.0, so an installed rbgo
+      # judges the published release and is blind to the branch under review.
+      # Measured, with Module.Label made to return "MUTANT" instead of its
+      # argument:
+      #
+      #   rbgo from `go install @latest`        ok    1.763s   <- saw nothing
+      #   rbgo built with a replace on this tree FAIL  "header missing"
+      #
+      # So the replace is the point of this step, not an implementation detail.
+      - name: build rbgo against THIS checkout
+        run: |
+          git clone --depth 1 https://github.com/go-embedded-ruby/ruby "$RUNNER_TEMP/rbgo-src"
+          cd "$RUNNER_TEMP/rbgo-src"
+          go mod edit -replace github.com/go-ruby-widgets/tui="$GITHUB_WORKSPACE"
+          go mod tidy
+          mkdir -p "$HOME/.local/bin"
+          go build -o "$HOME/.local/bin/rbgo" ./cmd/rbgo
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      # ⛔ A build is not a binary on PATH. Ask, in the shell the tests will use.
+      - name: rbgo is really here
+        run: command -v rbgo
+
+      # ⛔ -count=1: installing a program does not invalidate the Go test cache.
+      # exec.LookPath only stats, so `ok (cached)` can replay a run recorded
+      # before rbgo existed on the machine -- go-compressions/compress did
+      # exactly that on 2026-09-27, 50ms and nine skips after a successful apt.
+      # This pull request changes only a workflow, which is the case where every
+      # source the cache keyed on is untouched.
       - name: Test with coverage
-        run: go test -covermode=set -coverprofile=coverage.out ./...
+        run: |
+          set -o pipefail
+          go test -count=1 -v -covermode=set -coverprofile=coverage.out ./... 2>&1 | tee test-output.txt
+
+      # The judge's only skip reason is rbgo missing. If that line is in the
+      # output, the step above proved nothing about the interpreter.
+      - name: the rbgo judge must have judged
+        run: |
+          if grep -q "rbgo not on PATH" test-output.txt; then
+            echo "::error::the rbgo judge skipped; the interpreter run did not happen"
+            exit 1
+          fi
 
       - name: Assert 100% statement coverage
         run: |
@@ -47,7 +92,7 @@ jobs:
           fi
 
       - name: Race detector
-        run: CGO_ENABLED=1 go test -race ./...
+        run: CGO_ENABLED=1 go test -count=1 -race ./...
 
       - name: Cross-compile smoke (all 6 64-bit arches + wasm + darwin + windows)
         run: |
