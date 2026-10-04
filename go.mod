@@ -1,6 +1,6 @@
 module github.com/go-ruby-widgets/tui
 
-go 1.26.4
+go 1.27.1
 
 require (
 	github.com/go-widgets/toolkit v0.316.0
